@@ -1,4 +1,4 @@
-// $Header$
+// $Header: /var/cvs/jproxy/jproxy/src/com/lonsteins/jproxy/JproxyWorkThread.java,v 1.1.1.1 2002/02/06 01:54:41 lonstein Exp $
 package com.lonsteins.jproxy;
 
 
@@ -22,7 +22,10 @@ import util.HexDumpEncoder;
  * @version    0.2
  *
  * 0.1 - Initial release
- * $Log$
+ * $Log: JproxyWorkThread.java,v $
+ * Revision 1.1.1.1  2002/02/06 01:54:41  lonstein
+ * Imported to CVS.
+ *
  */
 public class JproxyWorkThread extends Thread {
 
@@ -62,7 +65,7 @@ public class JproxyWorkThread extends Thread {
   /**
    *  Main processing method for the JproxyWorkThread object
    */
-
+   public void run() {
 
     if (verbose) {
       System.out.println("Starting work thread " + prefix);
@@ -79,9 +82,12 @@ public class JproxyWorkThread extends Thread {
         out.write(buffer, 0, len);
       }
     }
-    catch (IOException ignored) {
+    catch (IOException ioe) {
 
-      // ignored... the stream libraries hide the socket so we don't know why
+     /** ignored... the stream libraries hide the socket so we don't know why
+      *  report the message anyway.
+      */
+      System.out.println(prefix+ioe.getMessage());
     }
 
     try {
@@ -91,9 +97,10 @@ public class JproxyWorkThread extends Thread {
       out.close();
       in.close();
     }
-    catch (IOException ignored) {
+    catch (IOException ioe) {
 
-      // ignored again... see above.
+      // ignored but reported again... see above.
+      System.out.println(prefix+ioe.getMessage());
     }
 
     System.out.println("Closed sockets. Exiting thread " + prefix);
@@ -115,9 +122,15 @@ public class JproxyWorkThread extends Thread {
       // dup valid part of buffer before encoding
       byte[] buf = new byte[len];
 
-      for (int i = 0; i < len; i++) {
-        buf[i] = buffer[i];
-      }
+     /**
+       *  System provided array copy faster? TBD.
+       *
+       *      for (int i = 0; i < len; i++) {
+       *        buf[i] = buffer[i];
+       *      }
+      */
+
+      System.arraycopy(buffer,0,buf,0,len);
 
       return hexdumper.encodeBuffer(buf);
     }
