@@ -1,4 +1,4 @@
-// $Header$
+// $Header: /var/cvs/jproxy/jproxy/src/com/lonsteins/jproxy/JproxyListener.java,v 1.1.1.1 2002/02/06 01:54:41 lonstein Exp $
 package com.lonsteins.jproxy;
 
 
@@ -21,7 +21,10 @@ import java.net.UnknownHostException;
  * @version    0.2
  *
  *  0.1 - initial release
- *  $Log$
+ *  $Log: JproxyListener.java,v $
+ *  Revision 1.1.1.1  2002/02/06 01:54:41  lonstein
+ *  Imported to CVS.
+ *
  */
 public class JproxyListener implements Runnable {
 
@@ -135,6 +138,6 @@ public class JproxyListener implements Runnable {
 
         noStopRequested = false;
       }
-    }
-  }
+    } // end while
+  } // end run
 }
