@@ -1,4 +1,4 @@
-// $Header$
+// $Header: /var/cvs/jproxy/jproxy/src/com/lonsteins/jproxy/Jproxy.java,v 1.1.1.1 2002/02/06 01:54:41 lonstein Exp $
 package com.lonsteins.jproxy;
 
 
@@ -25,7 +25,10 @@ import java.io.IOException;
  * @version    0.2
  *
  *  0.1 - initial release
- *  $Log$
+ *  $Log: Jproxy.java,v $
+ *  Revision 1.1.1.1  2002/02/06 01:54:41  lonstein
+ *  Imported to CVS.
+ *
  */
 public class Jproxy {
 
@@ -191,7 +194,7 @@ public class Jproxy {
   private static void usage() {
 
     System.out.println(
-      "\nusage: com.lonsteins.jproxy.Jproxy -p [localhost:]<port> -r [remote:]<port> -v");
+      "\nusage: com.lonsteins.jproxy.Jproxy -l [localhost:]<port> -r [remote:]<port> -v");
     System.out.println(" -v enables verbose mode with hex/ascii dump logging.");
     System.out.println(
       " The optional localhost is useful when multiple interfaces/ips are present.");
