@@ -84,8 +84,9 @@
         (checkchr nil)
         (total 0))
     (when checksum
-      (setf checkchr (char normalized-str (1- (length normalized-str))))
-      (setf normalized-str (subseq str 0 (1- (length normalized-str)))))
+      (let ((l (1- (length normalized-str))))
+        (setf checkchr (char normalized-str l))
+        (setf normalized-str (subseq str 0 l))))
     ;; Slightly clever. Instead of doing bit manipulations use
     ;; positional notation. V = D * B^P where digit's value (V) is the
     ;; digit (D) multiplied by the exponentiation of the Base (B) and
