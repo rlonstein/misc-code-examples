@@ -68,11 +68,10 @@
   (remove-if #'(lambda (c) (or (char= #\- c) (char= #\Space c))) str))
 
 (defun b32c-encode (int &key checksum)
-  ;;FIXME: this can be tightened up
   ;;TODO: implement chunking
   (loop :for n = int :then q
-        :for q = (ash n -5) ; bumming- lshift faster than mod, works but is valid?
-        :for r = (rem n 32)
+        :for q = (ash n -5)      ; lshift faster than mod, works but is it valid?
+        :for r = (- n (ash q 5)) ; use quotient to find remainder (r = q * 2^k - n) from H.S. Warren, Jr.
         :collect (value2char (if (zerop q) n r)) :into digits
         :until (zerop q)
         :finally (return (concatenate 'string (nreverse digits) (when checksum (string (checksum-chr int)))))))
