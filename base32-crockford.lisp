@@ -56,6 +56,7 @@
                                   )))
 
 (defun char2value (c)
+  (declare (type standard-char c))
   (let ((chr (char-upcase c)))
     (cond ((digit-char-p chr) (digit-char-p chr))
           ((alpha-char-p chr) (aref decoding-table (digit-char-p chr 36)))
@@ -66,10 +67,13 @@
           (t (error "Illegal char '~C'" c)))))
 
 (defun value2char (i)
+  (declare (type (integer 0 37) i))
   (aref encoding-table i))
 
 (defun normalize-string (str)
+  (declare (type string str))
   (remove-if #'(lambda (c) (or (char= #\- c) (char= #\Space c))) str))
+
 
 (defun b32c-encode (int &key checksum)
   ;;TODO: implement chunking
