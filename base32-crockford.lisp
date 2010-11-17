@@ -32,6 +32,8 @@
 (defvar encoding-table
   (make-array 37 :element-type 'character
               :adjustable nil
+              :fill-pointer nil
+              :displaced-to nil
               :initial-contents '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9
                                   #\A #\B #\C #\D #\E #\F #\G #\H
                                   #\J #\K
@@ -43,6 +45,8 @@
 (defvar decoding-table
   (make-array 36 :element-type 'integer
               :adjustable nil
+              :fill-pointer nil
+              :displaced-to nil
               :initial-contents '(0 1 2 3 4 5 6 7 8 9      ; numbers 0-9
                                   10 11 12 13 14 15 16 17  ; A,B,C,D,E,F,G,H
                                   1 18 19 1 20 21 0 22     ; I,J,K,L,M,N,O,P
