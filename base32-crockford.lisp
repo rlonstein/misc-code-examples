@@ -29,18 +29,7 @@
 
 (in-package #:b32c)
 
-(defvar encoding-table
-  (make-array 37 :element-type 'character
-              :adjustable nil
-              :fill-pointer nil
-              :displaced-to nil
-              :initial-contents '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9
-                                  #\A #\B #\C #\D #\E #\F #\G #\H
-                                  #\J #\K
-                                  #\M #\N
-                                  #\P #\Q #\R #\S #\T
-                                  #\V #\W #\X #\Y #\Z
-                                  #\* #\~ #\$ #\= #\U)))
+(defvar encoding-table "0123456789ABCDEFGHJKMNPQRSTVWXYZ*~$=U")
 
 (defvar decoding-table
   (make-array 36 :element-type 'integer
@@ -68,7 +57,7 @@
 
 (defun value2char (i)
   (declare (type (integer 0 37) i))
-  (aref encoding-table i))
+  (schar encoding-table i))
 
 (defun normalize-string (str)
   (declare (type string str))
