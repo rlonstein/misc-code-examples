@@ -63,6 +63,8 @@
   (declare (type string str))
   (remove-if #'(lambda (c) (or (char= #\- c) (char= #\Space c))) str))
 
+(defun checksum-chr (int)
+  (value2char (mod int 37)))
 
 (defun b32c-encode (int &key checksum)
   ;;TODO: implement chunking
@@ -72,9 +74,6 @@
         :collect (value2char (if (zerop q) n r)) :into digits
         :until (zerop q)
         :finally (return (concatenate 'string (nreverse digits) (when checksum (string (checksum-chr int)))))))
-
-(defun checksum-chr (int)
-  (value2char (mod int 37)))
 
 (defun b32c-decode (str &key checksum)
   (let ((normalized-str (normalize-string str))
