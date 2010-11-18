@@ -60,25 +60,31 @@
   (schar encoding-table i))
 
 (defun normalize-string (str)
-  (declare (type string str))
+  (declare (type simple-string str))
   (remove-if #'(lambda (c) (or (char= #\- c) (char= #\Space c))) str))
 
 (defun checksum-chr (int)
+  (declare (type integer int))
   (value2char (mod int 37)))
 
+(defun b32-encoded-length (int)
+  (multiple-value-bind (q r) (ceiling (integer-length int) 5)
+    (+ (if (zerop q) 1 q) (if (plusp r) 1 0))))
+
 (defun b32c-encode (int &key checksum)
-  ;;TODO: implement chunking
-  (loop :for n = int :then q
-        :for q = (ash n -5)      ; lshift faster than mod, works but is it valid?
+  (loop :with len = (b32-encoded-length int) ; encode into a preallocated string
+        :with output = (make-string len :element-type 'standard-char :initial-element #\Space)
+        :for n = int :then q
+        :for q = (ash n -5)      ; lshift faster than (floor n 32), works but is it valid?
         :for r = (- n (ash q 5)) ; use quotient to find remainder (r = q * 2^k - n) from H.S. Warren, Jr.
-        :collect (value2char (if (zerop q) n r)) :into digits
+        :for idx :downfrom (1- len)
+        :do (setf (char output idx) (value2char (if (zerop q) n r)))
         :until (zerop q)
-        :finally (return (concatenate 'string (nreverse digits) (when checksum (string (checksum-chr int)))))))
+        :finally (return (concatenate 'simple-string output (when checksum (string (checksum-chr int)))))))
 
 (defun b32c-decode (str &key checksum)
   (let ((normalized-str (normalize-string str))
-        (checkchr nil)
-        (total 0))
+        (checkchr nil))
     (when checksum
       (let ((l (1- (length normalized-str))))
         (setf checkchr (char normalized-str l))
