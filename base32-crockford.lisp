@@ -29,7 +29,7 @@
 
 (in-package #:b32c)
 
-(defvar encoding-table "0123456789ABCDEFGHJKMNPQRSTVWXYZ*~$=U")
+(defvar encoding-table #.(coerce "0123456789ABCDEFGHJKMNPQRSTVWXYZ*~$=U" 'simple-string))
 
 (defvar decoding-table
   (make-array 36 :element-type 'integer
