@@ -95,7 +95,7 @@
     ;; the positional value (P).  Ex: 465 in base10 is
     ;;   4*10^2 + 6*10^1 + 5*10^0 = 4*100 + 6*10 + 5*1 = 465
     ;; http://en.wikipedia.org/wiki/Positional_notation
-    (setf total (loop :for c :across (nreverse normalized-str)
-                      :for offset = 1 :then (* offset 32)
-                      :summing (* (char2value c) offset)))
-    (values total (if checksum (char2value checkchr)))))
+    (values (loop :for c :across (nreverse normalized-str)
+                  :for offset = 1 :then (* offset 32)
+                  :summing (* (char2value c) offset))
+            (if checksum (char2value checkchr)))))
