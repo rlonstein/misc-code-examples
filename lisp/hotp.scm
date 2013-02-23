@@ -7,7 +7,7 @@
 ;;; Released under the BSD license, http://opensource.org/licenses/BSD-2-Clause
 ;;;
 
-(use srfi-1 srfi-4 blob-set-int hmac sha1)
+(use srfi-1 srfi-4 blob-set-int hmac sha1 format)
 
 (declare (uses base32))
 
@@ -45,4 +45,5 @@
 
 
 ;; top-level invocation
-(print (gauth (second (argv))))
+(print   ; TODO: more silly string/number conversion...
+ (format #f "~6,'0D" (string->number (gauth (second (argv))))))
