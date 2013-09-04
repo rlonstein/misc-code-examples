@@ -32,8 +32,20 @@
     (trunc hash len)))
 
 
+(define (secs->tick seconds interval)
+  (inexact->exact (truncate (/ seconds interval))))
+
+(define (current-tick interval)
+  (secs->tick (current-seconds) interval))
+
+(define (secs-remaining-in-tick interval)
+  (let* ((now (inexact->exact (current-seconds)))
+         (next (* interval (secs->tick (+ 1 now) interval)))
+         (secs (- now next)))
+    (modulo (- interval secs) interval)))
+
 (define (totp key interval len)
-  (let ((c  (inexact->exact (truncate (/ (current-seconds) interval))))
+  (let ((c (current-tick interval))
         (msg (make-blob 8)))
     (blob-set-u64-be! msg c)
     (hotp key (blob->string msg) len))) ; blob->string ugly, maybe see TODO
@@ -46,4 +58,5 @@
 
 ;; top-level invocation
 (print   ; TODO: more silly string/number conversion...
- (format #f "~6,'0D" (string->number (gauth (second (argv))))))
+ (format #f "~6,'0D\n" (string->number (gauth (second (argv)))))
+ (format #f "~2D seconds remaining" (secs-remaining-in-tick 30)))
