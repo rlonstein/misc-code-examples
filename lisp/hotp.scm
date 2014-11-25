@@ -2,7 +2,7 @@
 ;;; Authenticator for Google based on RFC-4226 (HOTP) and RFC-6238
 ;;; (TOTP) in Chicken Scheme
 ;;;
-;;; Copyright (c) 2013, Ross Lonstein
+;;; Copyright (c) 2013, 2014 Ross Lonstein
 ;;;
 ;;; Released under the BSD license, http://opensource.org/licenses/BSD-2-Clause
 ;;;
@@ -57,6 +57,5 @@
 
 
 ;; top-level invocation
-(print   ; TODO: more silly string/number conversion...
- (format #f "~6,'0D\n" (string->number (gauth (second (argv)))))
- (format #f "~2D seconds remaining" (secs-remaining-in-tick 30)))
+(format #t "~6,'0D\n" (string->number (gauth (second (argv))))) ; TODO: more silly string/number conversion...
+(format (current-error-port) "~2D seconds remaining\n" (secs-remaining-in-tick 30))
