@@ -1,0 +1,46 @@
+#!/usr/bin/env txr -f
+@;
+@; Parse an ISC DHCP server leases file and the OUI data
+@; and produce pipe-delimited output of the leases
+@;
+@; Released under the MIT License
+@; Copyright (c) 2016, Ross Lonstein
+@; 
+@; TXR http://www.nongnu.org/txr/
+@;
+@; This script is not derived from dhcp-lease-list.pl but also see
+@; https://sources.debian.net/src/isc-dhcp/4.3.3-9/contrib/dhcp-lease-list.pl/
+@; for a similar tool written in Perl
+@;
+@(block)
+@; Debian path to OUI data, adjust for your system
+@(next "/usr/share/ieee-data/oui.txt")
+@(do (defvar OUICORP (hash :equal-based)))
+@(repeat)
+ @{OUI /([a-fA-F0-9][a-fA-F0-9][\-])*([a-fA-F0-9][a-fA-F0-9])/} (hex)@/[\t ]+/@CORP
+@(do(sethash OUICORP OUI CORP))
+@(end)
+@(end)
+@(do (defvar STATE))
+@(collect)
+lease @{IPADDR /\d+\.\d+\.\d+\.\d+/} {@\
+
+@(gather)
+@/\s/client-hostname "@HOSTNAME";
+@/\s/hardware ethernet @{MAC /([a-fA-F0-9][a-fA-F0-9][:])*([a-fA-F0-9][a-fA-F0-9])/};
+@/\s/starts @/[0-6]/ @START;
+@/\s/ends @/[0-6]/ @END;
+@(maybe)
+@/\s/binding state @STATE;
+@(end)
+@(end)
+}
+@(end)
+@(output)
+IPAddr|Hostname|HWAddr|OUI|Start|End|State
+@(repeat)
+@IPADDR|@HOSTNAME|@MAC|@\
+ @(gethash OUICORP (upcase-str (regsub #/:/ "-" (sub-str [MAC 0 8]))) "unknown")|@\
+ @START|@END|@STATE
+@(end)
+@(end)
