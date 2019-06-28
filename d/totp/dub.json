@@ -1,0 +1,14 @@
+{
+	"authors": [
+		"ross@github.lonsteins.com"
+	],
+	"copyright": "Copyright © 2019, ross@github.lonsteins.com",
+	"dependencies": {
+		"base32": "~>0.1.0",
+		"hotp": {"path": "../hotp"},
+		"hmac": {"path": "../hmac"}
+	},
+	"description": "RFC6238 TOTP password generator",
+	"license": "BSD",
+	"name": "totp"
+}

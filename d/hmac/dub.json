@@ -1,0 +1,10 @@
+{
+	"authors": [
+		"ross@github.lonsteins.com"
+	],
+	"copyright": "Copyright © 2019, ross@github.lonsteins.com",
+	"description": "HMAC implementation",
+	"license": "BSD",
+	"name": "hmac",
+	"targetType": "library"
+}

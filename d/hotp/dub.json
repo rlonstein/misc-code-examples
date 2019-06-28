@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"ross@github.lonsteins.com"
+	],
+	"copyright": "Copyright © 2019, ross@github.lonsteins.com",
+	"description": "HOTP implementation",
+	"license": "BSD",
+	"name": "hotp",
+	"dependencies": {
+		"hmac": {"path": "../hmac"}
+	},
+	"targetType": "library"
+}

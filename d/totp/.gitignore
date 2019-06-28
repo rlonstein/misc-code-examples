@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/totp
+totp.so
+totp.dylib
+totp.dll
+totp.a
+totp.lib
+totp-test-*
+*.exe
+*.o
+*.obj
+*.lst

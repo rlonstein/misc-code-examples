@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/hotp
+hotp.so
+hotp.dylib
+hotp.dll
+hotp.a
+hotp.lib
+hotp-test-*
+*.exe
+*.o
+*.obj
+*.lst

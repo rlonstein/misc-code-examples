@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/hmac
+hmac.so
+hmac.dylib
+hmac.dll
+hmac.a
+hmac.lib
+hmac-test-*
+*.exe
+*.o
+*.obj
+*.lst

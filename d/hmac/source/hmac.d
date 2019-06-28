@@ -29,7 +29,7 @@ ubyte[] HMAC(T, alias blocksize = 64)(in ubyte[] key, in ubyte[] msg) {
 
   if (key.length > blocksize) {
     // hash long keys
-    k = digest!T(key);
+    k[] = digest!T(key);
   }
   else {
     k = key.dup;

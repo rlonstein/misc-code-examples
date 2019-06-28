@@ -31,7 +31,7 @@ unittest {
   auto test_vector = [755224, 287082, 359152, 969429, 338314,
                       254676, 287922, 162583, 399871, 520489];
   for (ubyte i; i < 10; i++) {
-    assert(hotp(key, [0x0,0x0,0x0,0x0,0x0,0x0,0x0,i], 6) == test_vector[i]);
+    assert(hotp_sha1(key, [0x0,0x0,0x0,0x0,0x0,0x0,0x0,i], 6) == test_vector[i]);
   }
 }
 
