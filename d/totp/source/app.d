@@ -47,7 +47,7 @@ int main(string[] args) {
   long time = Clock.currTime().toUnixTime();
   long counter = time/interval;
   ubyte[8] c = nativeToBigEndian(counter);
-  stdout.writefln("Time = %d, Counter = %d, Bytes = %(%02X %)", time, counter, c);
+  //stdout.writefln("Time = %d, Counter = %d, Bytes = %(%02X %)", time, counter, c);
   uint totp = hotp_sha1(key, c);
 
   stdout.writefln("%d", totp);

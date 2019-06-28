@@ -7,6 +7,8 @@
 ;;; Released under the BSD license, http://opensource.org/licenses/BSD-2-Clause
 ;;;
 
+(import srfi-1 (chicken bitwise))
+
 (declare (unit base32))
 
 ;; lazy programmer conveniences...

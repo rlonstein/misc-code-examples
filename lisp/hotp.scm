@@ -7,7 +7,8 @@
 ;;; Released under the BSD license, http://opensource.org/licenses/BSD-2-Clause
 ;;;
 
-(use srfi-1 srfi-4 blob-set-int hmac sha1 format)
+(import (chicken process-context) (chicken bitwise) (chicken time) (chicken blob))
+(import srfi-1 srfi-4 blob-set-int hmac sha1 format)
 
 (declare (uses base32))
 
