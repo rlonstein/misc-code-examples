@@ -1,0 +1,6 @@
+name "sig"
+description "Pick a random quotation from a signature file"
+authors "rlonstein@github.lonsteins.com"
+copyright "Copyright © 2019, rlonstein@github.lonsteins.com"
+license "MIT"
+dependency "cli-d" version="~>0.1.1"

@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/sig
+sig.so
+sig.dylib
+sig.dll
+sig.a
+sig.lib
+sig-test-*
+*.exe
+*.o
+*.obj
+*.lst
