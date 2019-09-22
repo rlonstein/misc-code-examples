@@ -5,6 +5,7 @@ import std.bitmanip : nativeToBigEndian;
 import std.conv;
 import std.datetime.systime : Clock;
 import std.stdio;
+import std.string : toUpper;
 
 void usage() {
   stderr.writeln("Time-based One-Time Password generator (rfc-6238)");
@@ -23,7 +24,7 @@ int main(string[] args) {
     return rc;
   }
 
-  keystr = args[1];
+  keystr = toUpper(args[1]);
   try {
     key = Base32.decode(keystr);
   }
